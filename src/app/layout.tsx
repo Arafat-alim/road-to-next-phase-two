@@ -45,9 +45,9 @@ export default function RootLayout({
             {/* <Button>  asChild variant={"outline"} */}
             <Link
               href={ticketsPath()}
-              className={buttonVariants({ variant: "outline" })}
+              className={buttonVariants({ variant: "default" })}
             >
-              Tickets
+              <span className="text-lg font-medium">Tickets</span>
             </Link>
             {/* </Button> */}
           </div>
