@@ -1,11 +1,12 @@
-import { Button, buttonVariants } from "@/components/ui/button";
 import "./globals.css";
 
+import { LucideKanbanSquare } from "lucide-react";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
+
+import { Button, buttonVariants } from "@/components/ui/button";
 import { homePath, ticketsPath } from "@/path";
-import { LucideKanbanSquare } from "lucide-react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

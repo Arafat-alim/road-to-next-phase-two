@@ -1,8 +1,8 @@
+import { LucideCircleCheck, LucideFileCheck, LucidePencil } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 
-import { initialData } from "@/data";
-import { ticketPath } from "@/path";
+import { Heading } from "@/components/Heading";
 import {
   Card,
   CardContent,
@@ -10,8 +10,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
-import { LucideCircleCheck, LucideFileCheck, LucidePencil } from "lucide-react";
+import { initialData } from "@/data";
+import { ticketPath } from "@/path";
 
 const TICKET_ICON = {
   OPEN: <LucideFileCheck />,
@@ -22,14 +22,10 @@ const TICKET_ICON = {
 const TicketsPage = () => {
   return (
     <div className="flex-1 flex flex-col gap-y-8">
-      <div>
-        <h2 className="text-3xl font-bold tracking-tight">Tickets Page</h2>
-        <p className="text-sm text-muted-foreground">
-          All your tickets at one place
-        </p>
-      </div>
-
-      <Separator />
+      <Heading
+        title="Tickets Page"
+        description="All your tickets at one place"
+      />
 
       <div className="flex-1 flex flex-col items-center gap-y-4 animate-fade-in-from-top">
         {initialData.map((ticket) => (
