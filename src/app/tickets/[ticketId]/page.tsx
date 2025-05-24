@@ -1,7 +1,10 @@
 import Link from "next/link";
 import React from "react";
 
+import Placeholder from "@/components/placeholder";
+import { Button } from "@/components/ui/button";
 import { initialData } from "@/data";
+import { ticketsPath } from "@/path";
 
 // --- START CHANGE (Removed TicketPageProps interface entirely as before) ---
 // We are still not using an explicit interface for TicketPageProps to bypass Next.js's internal type issues.
@@ -75,15 +78,14 @@ const TicketPage = async ({ params }: any) => {
 
   if (!ticket) {
     return (
-      <div className="p-4">
-        <h1 className="text-2xl font-bold">Ticket Not Found</h1>
-        <Link
-          href="/tickets"
-          className="text-blue-500 hover:underline mt-4 inline-block"
-        >
-          Back to Tickets
-        </Link>
-      </div>
+      <Placeholder
+        label="Tickets not found"
+        button={
+          <Button variant={"link"}>
+            <Link href={ticketsPath()}>Back to Tickets</Link>
+          </Button>
+        }
+      />
     );
   }
 
