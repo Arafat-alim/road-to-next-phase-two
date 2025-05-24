@@ -4,6 +4,13 @@ import React from "react";
 
 import { initialData } from "@/data";
 import { ticketPath } from "@/path";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 const CheckIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -72,23 +79,26 @@ const TicketsPage = () => {
 
       <div className="flex-1 flex flex-col items-center gap-y-4 animate-fade-in-from-top">
         {initialData.map((ticket) => (
-          <div
-            key={ticket.id}
-            className="w-full max-w-[420px] border p-4 border-slate-300 rounded"
-          >
-            <div>{TICKET_ICON[ticket.status]}</div>
-            <h3 className="text-lg font-semibold truncate">{ticket.title}</h3>
-            <p
-              className={clsx("text-sm truncate text-gray-400", {
-                "line-through": ticket.status === "DONE",
-              })}
-            >
-              {ticket.content}
-            </p>
-            <Link href={ticketPath(ticket.id)} className="text-sm underline">
-              View
-            </Link>
-          </div>
+          <Card key={ticket.id} className="w-full max-w-[420px]">
+            <CardHeader>
+              <CardTitle className="flex gap-x-2">
+                <span>{TICKET_ICON[ticket.status]}</span>
+                <span className="text-lg font-semibold truncate">
+                  {ticket.title}
+                </span>
+              </CardTitle>
+            </CardHeader>
+
+            <CardContent className="line-clamp-3 whitespace-break-spaces">
+              <span>{ticket.content}</span>
+            </CardContent>
+
+            <CardFooter>
+              <Link href={ticketPath(ticket.id)} className="text-sm underline">
+                View
+              </Link>
+            </CardFooter>
+          </Card>
         ))}
       </div>
     </div>
