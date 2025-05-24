@@ -7,6 +7,7 @@ interface TicketPageProps {
   params: {
     ticketId: string;
   };
+  searchParams?: { [key: string]: string | string[] | undefined };
 }
 
 const CheckIcon = () => (
