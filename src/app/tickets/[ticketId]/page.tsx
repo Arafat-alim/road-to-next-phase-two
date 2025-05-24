@@ -66,8 +66,8 @@ type TicketPageProps = {
 };
 
 const TicketPage = ({ params }: TicketPageProps) => {
-  const ticketId = Number(params.ticketId);
-  const ticket = initialData.find((t) => t.id === ticketId);
+  const ticketID = Number(params.ticketId);
+  const ticket = initialData.find((t) => t.id === ticketID);
 
   if (!ticket) {
     return (
