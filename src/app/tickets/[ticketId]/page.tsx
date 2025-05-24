@@ -3,6 +3,12 @@ import React from "react";
 
 import { initialData } from "@/data";
 
+interface TicketPageProps {
+  params: {
+    ticketId: string;
+  };
+}
+
 const CheckIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -57,12 +63,6 @@ const TICKET_ICON = {
   OPEN: <DocumentIcon />,
   IN_PROGRESS: <PencilIcon />,
   DONE: <CheckIcon />,
-};
-
-type TicketPageProps = {
-  params: {
-    ticketId: string; // Note: URL params are always strings
-  };
 };
 
 const TicketPage = ({ params }: TicketPageProps) => {
