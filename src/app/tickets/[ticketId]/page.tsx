@@ -3,13 +3,6 @@ import React from "react";
 
 import { initialData } from "@/data";
 
-interface TicketPageProps {
-  params: {
-    ticketId: string;
-  };
-  searchParams?: { [key: string]: string | string[] | undefined };
-}
-
 const CheckIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -66,7 +59,7 @@ const TICKET_ICON = {
   DONE: <CheckIcon />,
 };
 
-const TicketPage = ({ params }: TicketPageProps) => {
+const TicketPage = async ({ params }: any) => {
   const ticketID = Number(params.ticketId);
   const ticket = initialData.find((t) => t.id === ticketID);
 
