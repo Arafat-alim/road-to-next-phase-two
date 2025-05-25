@@ -9,4 +9,5 @@ export type Ticket = {
 
 export type TicketItemProps = {
   ticket: Ticket;
+  isDetail?: boolean;
 };
