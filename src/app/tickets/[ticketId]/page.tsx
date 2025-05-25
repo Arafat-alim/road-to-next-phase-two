@@ -4,8 +4,8 @@ import React from "react";
 import Placeholder from "@/components/placeholder";
 import { Button } from "@/components/ui/button";
 import { initialData } from "@/data";
-import { ticketsPath } from "@/path";
 import { TicketItem } from "@/features/ticket/components/ticket-item";
+import { ticketsPath } from "@/path";
 
 // --- START CHANGE (Fixing ESLint errors) ---
 // 1. Removed 'searchParams' from destructuring as it's unused.

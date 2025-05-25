@@ -1,14 +1,14 @@
+import clsx from "clsx";
+import { LucideSquareArrowOutUpRight } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ticketPath } from "@/path";
 
 import { TICKET_ICON } from "../constants";
 import { TicketItemProps } from "../types";
-import { Button } from "@/components/ui/button";
-import { LucideSquareArrowOutUpRight } from "lucide-react";
-import clsx from "clsx";
 
 const TicketItem = ({ ticket, isDetail }: TicketItemProps) => {
   const utilityButton = (

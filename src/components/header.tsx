@@ -4,8 +4,8 @@ import React from "react";
 
 import { homePath, ticketsPath } from "@/path";
 
-import { Button, buttonVariants } from "./ui/button";
 import { ThemeSwitcher } from "./theme/theme-switcher";
+import { Button, buttonVariants } from "./ui/button";
 
 const Header = () => {
   return (
