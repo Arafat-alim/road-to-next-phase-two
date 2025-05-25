@@ -1,38 +1,40 @@
 import Link from "next/link";
 import React from "react";
 
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ticketPath } from "@/path";
 
 import { TICKET_ICON } from "../constants";
 import { TicketItemProps } from "../types";
+import { Button } from "@/components/ui/button";
+import { LucideSquareArrowOutUpRight } from "lucide-react";
 
 const TicketItem = ({ ticket }: TicketItemProps) => {
+  const utilityButton = (
+    <Button variant={"outline"} asChild size={"icon"}>
+      <Link href={ticketPath(ticket.id)}>
+        <LucideSquareArrowOutUpRight className="w-4 h-4" />
+      </Link>
+    </Button>
+  );
   return (
-    <Card className="w-full max-w-[420px]">
-      <CardHeader>
-        <CardTitle className="flex gap-x-2 items-center">
-          <span>{TICKET_ICON[ticket.status]}</span>
-          <span className="text-lg font-semibold truncate">{ticket.title}</span>
-        </CardTitle>
-      </CardHeader>
+    <div className="w-full max-w-[420px] flex gap-x-1">
+      <Card className="w-full ">
+        <CardHeader>
+          <CardTitle className="flex gap-x-2 items-center">
+            <span>{TICKET_ICON[ticket.status]}</span>
+            <span className="text-lg font-semibold truncate">
+              {ticket.title}
+            </span>
+          </CardTitle>
+        </CardHeader>
 
-      <CardContent className="line-clamp-3 whitespace-break-spaces">
-        <span>{ticket.content}</span>
-      </CardContent>
-
-      <CardFooter>
-        <Link href={ticketPath(ticket.id)} className="text-sm underline">
-          View
-        </Link>
-      </CardFooter>
-    </Card>
+        <CardContent className="line-clamp-3 whitespace-break-spaces">
+          <span>{ticket.content}</span>
+        </CardContent>
+      </Card>
+      <div className="flex flex-col gap-y-1">{utilityButton}</div>
+    </div>
   );
 };
 
