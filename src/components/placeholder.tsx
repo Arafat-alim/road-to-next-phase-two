@@ -3,15 +3,16 @@ import React, { cloneElement } from "react";
 
 type PlaceholderProps = {
   label: string;
-  icon?: React.ReactElement;
-  button?: React.ReactElement;
+  icon?: React.ReactElement<React.HTMLAttributes<HTMLElement>>;
+  button?: React.ReactElement<React.HTMLAttributes<HTMLElement>>;
 };
 
 const Placeholder = ({
   label,
-  icon = <LucideMessageSquareWarning />,
-
-  button = <div />,
+  icon = (<LucideMessageSquareWarning />) as React.ReactElement<
+    React.HTMLAttributes<HTMLElement>
+  >,
+  button = (<div />) as React.ReactElement<React.HTMLAttributes<HTMLElement>>,
 }: PlaceholderProps) => {
   return (
     <div className="flex-1 flex flex-col self-center justify-center items-center">
