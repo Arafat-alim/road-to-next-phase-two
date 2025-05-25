@@ -5,6 +5,7 @@ import React from "react";
 import { homePath, ticketsPath } from "@/path";
 
 import { Button, buttonVariants } from "./ui/button";
+import { ThemeSwitcher } from "./theme/theme-switcher";
 
 const Header = () => {
   return (
@@ -17,8 +18,9 @@ const Header = () => {
           </Link>
         </Button>
       </div>
-      <div>
+      <div className="flex gap-x-2 items-center">
         {/* <Button>  asChild variant={"outline"} */}
+        <ThemeSwitcher />
         <Link
           href={ticketsPath()}
           className={buttonVariants({ variant: "default" })}
