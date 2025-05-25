@@ -74,7 +74,7 @@ const TICKET_ICON = {
 const TicketPage = async ({ params }: any) => {
   // --- END CHANGE ---
   const ticketID = Number(params.ticketId);
-  const ticket = initialData.find((t) => t.id === ticketID);
+  const ticket = initialData.find((t) => Number(t.id) === ticketID);
 
   if (!ticket) {
     return (
