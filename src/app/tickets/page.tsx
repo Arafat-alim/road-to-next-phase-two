@@ -1,26 +1,11 @@
-"use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import { Heading } from "@/components/Heading";
 import { TicketItem } from "@/features/ticket/components/ticket-item";
 import { getTickets } from "@/features/ticket/queries/get-tickets";
-import { Ticket } from "@/features/ticket/types";
 
-const TicketsPage = () => {
-  const [tickets, setTickets] = useState<Ticket[]>([]);
-
-  useEffect(() => {
-    const fetchTickets = async () => {
-      try {
-        const results = await getTickets();
-        setTickets(results);
-      } catch (err) {
-        console.error("Failed to fetch tickets: ", err);
-      }
-    };
-    fetchTickets();
-  }, []);
-
+const TicketsPage = async () => {
+  const tickets = await getTickets();
   return (
     <div className="flex-1 flex flex-col gap-y-8">
       <Heading
