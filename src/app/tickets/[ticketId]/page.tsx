@@ -3,8 +3,8 @@ import React from "react";
 
 import Placeholder from "@/components/placeholder";
 import { Button } from "@/components/ui/button";
-import { initialData } from "@/data";
 import { TicketItem } from "@/features/ticket/components/ticket-item";
+import { getTicket } from "@/features/ticket/queries/get-ticket";
 import { ticketsPath } from "@/path";
 
 // --- START CHANGE (Fixing ESLint errors) ---
@@ -14,8 +14,7 @@ import { ticketsPath } from "@/path";
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const TicketPage = async ({ params }: any) => {
   // --- END CHANGE ---
-  const ticketID = Number(params.ticketId);
-  const ticket = initialData.find((t) => Number(t.id) === ticketID);
+  const ticket = await getTicket(params?.ticketId);
 
   if (!ticket) {
     return (
