@@ -1,3 +1,5 @@
+// eslint.config.mjs
+
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 import { FlatCompat } from "@eslint/eslintrc";
@@ -11,20 +13,29 @@ const compat = new FlatCompat({
 });
 
 const eslintConfig = [
+  // --- ADD THIS CONFIGURATION OBJECT AT THE TOP ---
+  {
+    ignores: ["src/generated/**"], // This tells ESLint to ignore all files inside src/generated/
+  },
+  // --- END OF ADDITION ---
+
   ...compat.extends("next/core-web-vitals", "next/typescript"),
   {
-    // Add a new configuration object for simple-import-sort
     plugins: {
       "simple-import-sort": simpleImportSort,
     },
     rules: {
       "simple-import-sort/imports": "error",
       "simple-import-sort/exports": "error",
-      // Optional: Add the import rules from eslint-plugin-import if you want them
-      // These are generally good practices for imports
-      // "import/first": "error", // Make sure to install eslint-plugin-import if you use these
-      // "import/newline-after-import": "error",
-      // "import/no-duplicates": "error",
+      // Optional: If you still see errors related to specific rules even after ignoring,
+      // you might need to relax them for your own code or verify the ignore path.
+      // For instance, if you have other generated files outside src/generated or
+      // you prefer a less strict linting for some of your code.
+      // Example of relaxing rules (use with caution for your own code):
+      // "@typescript-eslint/no-explicit-any": "warn",
+      // "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
+      // "@typescript-eslint/no-require-imports": "off",
+      // "@typescript-eslint/no-empty-object-type": "off",
     },
   },
 ];

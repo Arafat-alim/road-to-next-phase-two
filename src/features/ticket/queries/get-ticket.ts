@@ -1,5 +1,6 @@
-import { Ticket } from "../types";
 import { prisma } from "@/lib/prisma";
+
+import { Ticket } from "../types";
 
 export const getTicket = async (id: string): Promise<Ticket | null> => {
   return await prisma.tickets.findUnique({
