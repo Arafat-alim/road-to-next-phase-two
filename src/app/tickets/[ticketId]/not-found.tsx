@@ -1,8 +1,9 @@
+import Link from "next/link";
+import React from "react";
+
 import Placeholder from "@/components/placeholder";
 import { Button } from "@/components/ui/button";
 import { ticketsPath } from "@/path";
-import Link from "next/link";
-import React from "react";
 
 const NotFound = () => {
   return (
