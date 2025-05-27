@@ -5,10 +5,15 @@ import React from "react";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Tickets } from "@/generated/prisma";
 import { ticketPath } from "@/path";
 
 import { TICKET_ICON } from "../constants";
-import { TicketItemProps } from "../types";
+
+type TicketItemProps = {
+  ticket: Tickets;
+  isDetail?: boolean;
+};
 
 const TicketItem = ({ ticket, isDetail }: TicketItemProps) => {
   const utilityButton = (
