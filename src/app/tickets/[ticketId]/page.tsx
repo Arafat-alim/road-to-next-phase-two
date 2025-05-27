@@ -11,7 +11,7 @@ import { getTicket } from "@/features/ticket/queries/get-ticket";
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const TicketPage = async ({ params }: any) => {
   // --- END CHANGE ---
-  const ticket = await getTicket(params?.ticketId);
+  const ticket = await getTicket(params.ticketId);
 
   if (!ticket) {
     notFound();
