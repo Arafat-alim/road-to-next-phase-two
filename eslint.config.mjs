@@ -15,7 +15,7 @@ const compat = new FlatCompat({
 const eslintConfig = [
   // --- ADD THIS CONFIGURATION OBJECT AT THE TOP ---
   {
-    ignores: ["src/generated/**"], // This tells ESLint to ignore all files inside src/generated/
+    ignores: ["src/generated/**", "app/generated/**"],
   },
   // --- END OF ADDITION ---
 
