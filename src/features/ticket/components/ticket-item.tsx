@@ -1,3 +1,4 @@
+import { Tickets } from "@prisma/client";
 import clsx from "clsx";
 import { LucideSquareArrowOutUpRight, LucideTrash } from "lucide-react";
 import Link from "next/link";
@@ -5,7 +6,6 @@ import React from "react";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Tickets } from "@prisma/client";
 import { ticketPath } from "@/path";
 
 // import { Tickets } from "../../../../app/generated/prisma";

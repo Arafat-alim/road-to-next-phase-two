@@ -1,4 +1,5 @@
 import { Tickets } from "@prisma/client";
+
 import { prisma } from "@/lib/prisma";
 
 // import { Tickets } from "../../../../app/generated/prisma";
