@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ticketPath } from "@/path";
 
-// import { Tickets } from "../../../../app/generated/prisma";
 import { deleteTicket } from "../actions/delete-ticket";
 import { TICKET_ICON } from "../constants";
 
