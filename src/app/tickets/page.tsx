@@ -1,14 +1,8 @@
 import React, { Suspense } from "react";
 
+import { CardCompact } from "@/components/card-compact";
 import { Heading } from "@/components/Heading";
 import { Spinner } from "@/components/spinner";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { TicketCreateForm } from "@/features/ticket/components/ticket-create-form";
 import TicketList from "@/features/ticket/components/ticket-list";
 
@@ -19,15 +13,14 @@ const TicketsPage = async () => {
         title="Tickets Page"
         description="All your tickets at one place"
       />
-      <Card className="w-full max-w-[420px] self-center">
-        <CardHeader>
-          <CardTitle>Create a ticket</CardTitle>
-          <CardDescription>New ticket will be created.</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <TicketCreateForm />
-        </CardContent>
-      </Card>
+
+      <CardCompact
+        title="Create a ticket"
+        description="New ticket will be created."
+        className="w-full max-w-[420px] self-center"
+        content={<TicketCreateForm />}
+      />
+
       <Suspense fallback={<Spinner />}>
         <TicketList />
       </Suspense>
