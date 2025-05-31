@@ -1,0 +1,68 @@
+"use client";
+import { Tickets } from "@prisma/client";
+import React, { useActionState } from "react";
+import { toast } from "sonner";
+
+import { FieldErrors } from "@/components/form/field-error";
+import { useActionFeedback } from "@/components/form/hooks/use-action-feedback";
+import { SubmitButton } from "@/components/form/submit-button";
+import { EMPTY_ACTION_STATE } from "@/components/form/utils/to-action-state";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+
+import { upsertTicket } from "../actions/upsert-ticket";
+
+type TicketUpsertFormProps = {
+  ticket?: Tickets;
+};
+
+const TicketUpsertForm = ({ ticket }: TicketUpsertFormProps) => {
+  const [actionState, action] = useActionState(
+    upsertTicket.bind(null, ticket?.id),
+    EMPTY_ACTION_STATE
+  );
+
+  useActionFeedback(actionState, {
+    onSuccess: ({ actionState }) => {
+      if (actionState.message) {
+        toast.success(actionState.message);
+      }
+    },
+    onError: ({ actionState }) => {
+      if (actionState.message) {
+        toast.error(actionState.message);
+      }
+    },
+  });
+
+  return (
+    <form action={action} className="flex flex-col gap-y-2">
+      {/* <input name="id" type="hidden" defaultValue={ticket.id} /> */}
+      <Label htmlFor="title">Title</Label>
+      <Input
+        type="text"
+        name="title"
+        id="title"
+        defaultValue={
+          (actionState.payload?.get("title") as string) ?? ticket?.title
+        }
+      />
+      <FieldErrors name="title" actionState={actionState} />
+
+      <Label htmlFor="content">Content</Label>
+      <Textarea
+        id="content"
+        name="content"
+        defaultValue={
+          (actionState.payload?.get("content") as string) ?? ticket?.content
+        }
+      />
+      <FieldErrors name="content" actionState={actionState} />
+
+      <SubmitButton label={ticket ? "Edit" : "Submit"} />
+    </form>
+  );
+};
+
+export default TicketUpsertForm;

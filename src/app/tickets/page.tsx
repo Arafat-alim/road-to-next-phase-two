@@ -1,10 +1,10 @@
 import React, { Suspense } from "react";
-import { ErrorBoundary } from "react-error-boundary";
 
+import { CardCompact } from "@/components/card-compact";
 import { Heading } from "@/components/Heading";
-import Placeholder from "@/components/placeholder";
 import { Spinner } from "@/components/spinner";
 import TicketList from "@/features/ticket/components/ticket-list";
+import TicketUpsertForm from "@/features/ticket/components/ticket-upsert-form";
 
 const TicketsPage = async () => {
   return (
@@ -13,11 +13,17 @@ const TicketsPage = async () => {
         title="Tickets Page"
         description="All your tickets at one place"
       />
-      <ErrorBoundary fallback={<Placeholder label="Something went wrong" />}>
-        <Suspense fallback={<Spinner />}>
-          <TicketList />
-        </Suspense>
-      </ErrorBoundary>
+
+      <CardCompact
+        title="Create a ticket"
+        description="New ticket will be created."
+        className="w-full max-w-[420px] self-center"
+        content={<TicketUpsertForm />}
+      />
+
+      <Suspense fallback={<Spinner />}>
+        <TicketList />
+      </Suspense>
     </div>
   );
 };

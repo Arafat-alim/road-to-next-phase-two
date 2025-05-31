@@ -1,19 +1,45 @@
+import { Tickets } from "@prisma/client";
 import clsx from "clsx";
-import { LucideSquareArrowOutUpRight } from "lucide-react";
+import {
+  LucideEdit,
+  LucideSquareArrowOutUpRight,
+  LucideTrash,
+} from "lucide-react";
 import Link from "next/link";
 import React from "react";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ticketPath } from "@/path";
+import { ticketEditPath, ticketPath } from "@/path";
 
+import { deleteTicket } from "../actions/delete-ticket";
 import { TICKET_ICON } from "../constants";
-import { TicketItemProps } from "../types";
+
+type TicketItemProps = {
+  ticket: Tickets;
+  isDetail?: boolean;
+};
 
 const TicketItem = ({ ticket, isDetail }: TicketItemProps) => {
-  const utilityButton = (
+  const updateButton = (
+    <Button variant={"outline"} size={"icon"}>
+      <Link prefetch href={ticketEditPath(ticket.id)}>
+        <LucideEdit className="w-4 h-4" />
+      </Link>
+    </Button>
+  );
+
+  const deleteButton = (
+    <form action={deleteTicket.bind(null, ticket.id)}>
+      <Button variant={"outline"} size={"icon"}>
+        <LucideTrash className="w-4 h-4" />
+      </Button>
+    </form>
+  );
+
+  const detailButton = (
     <Button variant={"outline"} asChild size={"icon"}>
-      <Link href={ticketPath(ticket.id)}>
+      <Link prefetch href={ticketPath(ticket.id)}>
         <LucideSquareArrowOutUpRight className="w-4 h-4" />
       </Link>
     </Button>
@@ -43,9 +69,19 @@ const TicketItem = ({ ticket, isDetail }: TicketItemProps) => {
           <span>{ticket.content}</span>
         </CardContent>
       </Card>
-      {isDetail ? null : (
-        <div className="flex flex-col gap-y-1">{utilityButton}</div>
-      )}
+      <div className="flex flex-col gap-y-1">
+        {isDetail ? (
+          <>
+            {updateButton}
+            {deleteButton}
+          </>
+        ) : (
+          <>
+            {detailButton}
+            {updateButton}
+          </>
+        )}
+      </div>
     </div>
   );
 };
