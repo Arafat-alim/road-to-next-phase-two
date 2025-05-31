@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 
 import { upsertTicket } from "../actions/upsert-ticket";
+import { EMPTY_ACTION_STATE } from "@/components/form/utils/to-action-state";
 
 type TicketUpsertFormProps = {
   ticket?: Tickets;
@@ -17,10 +18,7 @@ type TicketUpsertFormProps = {
 const TicketUpsertForm = ({ ticket }: TicketUpsertFormProps) => {
   const [actionState, action] = useActionState(
     upsertTicket.bind(null, ticket?.id),
-    {
-      message: "",
-      fieldErrors: {},
-    }
+    EMPTY_ACTION_STATE
   );
   return (
     <form action={action} className="flex flex-col gap-y-2">
