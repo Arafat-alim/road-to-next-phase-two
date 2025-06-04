@@ -4,7 +4,6 @@ import {
   LucideEdit,
   LucideMoreVertical,
   LucideSquareArrowOutUpRight,
-  LucideTrash,
 } from "lucide-react";
 import Link from "next/link";
 import React from "react";
@@ -20,10 +19,8 @@ import {
 import { ticketEditPath, ticketPath } from "@/path";
 import { toCurrencyFromPaise } from "@/utils/currency";
 
-import { deleteTicket } from "../actions/delete-ticket";
 import { TICKET_ICON } from "../constants";
 import { TicketMoreMenu } from "./ticket-more-menu";
-import { ConfirmDialog } from "@/components/confirm-dialog";
 
 type TicketItemProps = {
   ticket: Tickets;
@@ -37,25 +34,6 @@ const TicketItem = ({ ticket, isDetail }: TicketItemProps) => {
         <LucideEdit className="w-4 h-4" />
       </Link>
     </Button>
-  );
-
-  // const deleteButton = (
-  //   <form action={deleteTicket.bind(null, ticket.id)}>
-  //     <Button variant={"outline"} size={"icon"}>
-  //       <LucideTrash className="w-4 h-4" />
-  //     </Button>
-  //   </form>
-  // );
-
-  const deleteButton = (
-    <ConfirmDialog
-      action={deleteTicket.bind(null, ticket.id)}
-      trigger={
-        <Button variant={"outline"} size={"icon"}>
-          <LucideTrash className="w-4 h-4" />
-        </Button>
-      }
-    />
   );
 
   const detailButton = (
@@ -112,7 +90,6 @@ const TicketItem = ({ ticket, isDetail }: TicketItemProps) => {
         {isDetail ? (
           <>
             {updateButton}
-            {deleteButton}
             {moreMenu}
           </>
         ) : (
