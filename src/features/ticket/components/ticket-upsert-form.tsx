@@ -11,6 +11,8 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 
 import { upsertTicket } from "../actions/upsert-ticket";
+import { fromPaise } from "@/utils/currency";
+import { DatePicker } from "@/components/date-picker";
 
 type TicketUpsertFormProps = {
   ticket?: Tickets;
@@ -44,6 +46,44 @@ const TicketUpsertForm = ({ ticket }: TicketUpsertFormProps) => {
         }
       />
       <FieldErrors name="content" actionState={actionState} />
+      <div className="flex gap-x-2 mb-1">
+        <div className="w-1/2">
+          <Label htmlFor="deadline">Deadline</Label>
+          {/* <Input
+            id="deadline"
+            name="deadline"
+            type="date"
+            defaultValue={
+              (actionState.payload?.get("deadline") as string) ??
+              ticket?.deadline
+            }
+          /> */}
+          <DatePicker
+            id="deadline"
+            name="deadline"
+            defaultValue={
+              (actionState.payload?.get("deadline") as string) ??
+              ticket?.deadline
+            }
+          />
+          <FieldErrors name="deadline" actionState={actionState} />
+        </div>
+
+        <div className="w-1/2">
+          <Label htmlFor="bounty">Bounty (₹)</Label>
+          <Input
+            id="bounty"
+            name="bounty"
+            type="number"
+            defaultValue={
+              (actionState.payload?.get("bounty") as string) ??
+              (ticket?.bounty ? fromPaise(ticket?.bounty) : "")
+            }
+            step=".01"
+          />
+          <FieldErrors name="bounty" actionState={actionState} />
+        </div>
+      </div>
 
       <SubmitButton label={ticket ? "Edit" : "Submit"} />
     </Form>
