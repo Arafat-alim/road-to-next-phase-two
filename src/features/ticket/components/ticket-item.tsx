@@ -17,10 +17,10 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { ticketEditPath, ticketPath } from "@/path";
+import { toCurrencyFromPaise } from "@/utils/currency";
 
 import { deleteTicket } from "../actions/delete-ticket";
 import { TICKET_ICON } from "../constants";
-import { toCurrencyFromPaise } from "@/utils/currency";
 
 type TicketItemProps = {
   ticket: Tickets;
