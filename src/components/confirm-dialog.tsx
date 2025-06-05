@@ -19,7 +19,7 @@ type UseConfirmDialogProps = {
   title?: string;
   description?: string;
   action: () => Promise<ActionState>;
-  trigger: React.ReactElement;
+  trigger: React.ReactElement<{ onClick?: () => void }>;
 };
 
 const useConfirmDialog = ({
