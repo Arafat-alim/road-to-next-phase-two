@@ -1,14 +1,15 @@
 "use server";
-import { hash } from "@node-rs/argon2";
+import { redirect } from "next/navigation";
 import { z } from "zod";
 
 import {
   ActionState,
   fromErrorToActionState,
-  toActionState,
 } from "@/components/form/utils/to-action-state";
+import { hashPassword } from "@/features/password/utils/hash-and-verify";
 import { createSession } from "@/lib/lucia";
 import { prisma } from "@/lib/prisma";
+import { ticketsPath } from "@/path";
 import { generateRandomToken } from "@/utils/crypto";
 
 import { setSessionCookie } from "../utils/session-cookie";
@@ -43,7 +44,7 @@ export const signup = async (_actionState: ActionState, formData: FormData) => {
       Object.fromEntries(formData)
     );
 
-    const passwordHash = await hash(password);
+    const passwordHash = await hashPassword(password);
 
     const user = await prisma.user.create({
       data: {
@@ -60,6 +61,5 @@ export const signup = async (_actionState: ActionState, formData: FormData) => {
   } catch (err) {
     return fromErrorToActionState(err, formData);
   }
-
-  return toActionState("SUCCESS", "Sign up successfully");
+  redirect(ticketsPath());
 };
