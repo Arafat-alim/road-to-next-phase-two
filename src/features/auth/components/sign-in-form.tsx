@@ -14,10 +14,20 @@ const SignInForm = () => {
   const [actionState, action] = useActionState(signin, EMPTY_ACTION_STATE);
   return (
     <Form action={action} actionState={actionState}>
-      <Input type="email" name="email" placeholder="Email" />
+      <Input
+        type="email"
+        name="email"
+        placeholder="Email"
+        defaultValue={actionState.payload?.get("email") as string}
+      />
       <FieldErrors actionState={actionState} name="email" />
 
-      <Input type="password" name="password" placeholder="Password" />
+      <Input
+        type="password"
+        name="password"
+        placeholder="Password"
+        defaultValue={actionState.payload?.get("password") as string}
+      />
       <FieldErrors actionState={actionState} name="password" />
 
       <SubmitButton label="Sign in" />

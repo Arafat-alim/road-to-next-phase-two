@@ -13,6 +13,9 @@ import { generateRandomToken } from "@/utils/crypto";
 
 import { setSessionCookie } from "../auth/utils/session-cookie";
 import { hashPassword } from "../password/utils/hash-and-verify";
+import { Prisma } from "@prisma/client";
+import { redirect } from "next/navigation";
+import { ticketsPath } from "@/path";
 
 const signupSchema = z
   .object({
@@ -58,9 +61,19 @@ export const signup = async (_actionState: ActionState, formData: FormData) => {
     const session = await createSession(sessionToken, user.id);
 
     await setSessionCookie(sessionToken, session.expiresAt);
-  } catch (err) {
-    return fromErrorToActionState(err, formData);
+  } catch (error) {
+    if (
+      error instanceof Prisma.PrismaClientKnownRequestError &&
+      error.code === "P2002"
+    ) {
+      return toActionState(
+        "ERROR",
+        "Either email or username is already in use",
+        formData
+      );
+    }
+    return fromErrorToActionState(error, formData);
   }
 
-  return toActionState("SUCCESS", "Sign up successfully");
+  redirect(ticketsPath());
 };

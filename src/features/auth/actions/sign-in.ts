@@ -31,12 +31,12 @@ export const signin = async (_actionState: ActionState, formData: FormData) => {
     });
 
     if (!user) {
-      return toActionState("ERROR", "Incorrect email or passsword");
+      return toActionState("ERROR", "Incorrect email or passsword", formData);
     }
 
     const validPassword = await verifyPassword(user.passwordHash, password);
     if (!validPassword) {
-      return toActionState("ERROR", "Incorrect email or passsword");
+      return toActionState("ERROR", "Incorrect email or passsword", formData);
     }
 
     const sesstionToken = generateRandomToken();
@@ -44,7 +44,7 @@ export const signin = async (_actionState: ActionState, formData: FormData) => {
 
     await setSessionCookie(sesstionToken, session.expiresAt);
   } catch (error) {
-    return fromErrorToActionState(error);
+    return fromErrorToActionState(error, formData);
   }
 
   redirect(ticketsPath());
