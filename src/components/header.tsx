@@ -1,17 +1,23 @@
+"use client";
 import { LucideKanbanSquare, LucideLogOut } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 
 import { signOut } from "@/features/auth/actions/sign-out";
+import { useAuth } from "@/features/auth/hooks/use-auth";
 import { homePath, signInPath, signUpPath, ticketsPath } from "@/path";
 
 import { SubmitButton } from "./form/submit-button";
 import { ThemeSwitcher } from "./theme/theme-switcher";
 import { Button, buttonVariants } from "./ui/button";
-import { getAuth } from "@/features/auth/queries/get-auth";
 
-const Header = async () => {
-  const { user } = await getAuth();
+const Header = () => {
+  const { user, isFetched } = useAuth();
+
+  if (!isFetched) {
+    return null;
+  }
+
   const navItems = user ? (
     <>
       <Link
@@ -43,7 +49,7 @@ const Header = async () => {
   );
 
   return (
-    <nav className="supports-backdrop-blur:bg-background/60 fixed left-0 right-0 top-0 z-20 border-b bg-background/95 backdrop-blur w-full flex py-2.5 px-5 justify-between">
+    <nav className="animate-header-from-top supports-backdrop-blur:bg-background/60 fixed left-0 right-0 top-0 z-20 border-b bg-background/95 backdrop-blur w-full flex py-2.5 px-5 justify-between">
       <div>
         <Button asChild variant={"ghost"}>
           <Link href={homePath()}>
@@ -53,7 +59,6 @@ const Header = async () => {
         </Button>
       </div>
       <div className="flex gap-x-2 items-center">
-        {/* <Button>  asChild variant={"outline"} */}
         <ThemeSwitcher />
         {navItems}
       </div>
