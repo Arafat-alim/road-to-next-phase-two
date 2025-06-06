@@ -46,6 +46,7 @@
   /* --- Define your custom animation utility here --- */
   /* This maps 'animate-fade-in-from-top' to your keyframes. */
   --animate-fade-in-from-top: fade-in-from-top 0.5s ease-out forwards;
+  --animate-header-from-top: header-from-top 0.5s ease-out;
 
   /* --- Define your @keyframes rule directly here --- */
   /* This specifies the steps of your animation. */
@@ -56,6 +57,14 @@
     }
     to {
       opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes header-from-top {
+    from {
+      transform: translateY(-100%);
+    }
+    to {
       transform: translateY(0);
     }
   }
