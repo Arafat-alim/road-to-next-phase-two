@@ -1,6 +1,5 @@
 "use client";
 import { LucideLoaderCircle } from "lucide-react";
-import { cloneElement } from "react";
 import { useFormStatus } from "react-dom";
 
 import { Button } from "../ui/button";
@@ -25,13 +24,7 @@ const SubmitButton = ({ label, icon, variant, size }: submitButtonProps) => {
     <Button disabled={pending} type="submit" variant={variant} size={size}>
       {pending && <LucideLoaderCircle className="w-4 h-4 animate-spin" />}
       {label}
-      {pending ? null : icon ? (
-        <span>
-          {cloneElement(icon, {
-            className: "w-4 h-4",
-          })}
-        </span>
-      ) : null}
+      {pending ? null : icon ? <span>{icon}</span> : null}
     </Button>
   );
 };

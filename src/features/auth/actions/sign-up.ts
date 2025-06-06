@@ -26,7 +26,7 @@ const signupSchema = z
       ),
     email: z.string().min(1, { message: "Is required" }).max(191).email(),
     password: z.string().min(6).max(191),
-    confirmPassword: z.string(6).max(191),
+    confirmPassword: z.string().min(6).max(191),
   })
   .superRefine(({ password, confirmPassword }, ctx) => {
     if (password !== confirmPassword) {

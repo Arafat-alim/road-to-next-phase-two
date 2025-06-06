@@ -8,6 +8,7 @@ import { SESSION_COOKIE_NAME } from "../utils/session-cookie";
 
 const getAuth = cache(async () => {
   const sessionToken =
+    // @ts-expect-error incorrect type inference in next/headers
     (await cookies().get(SESSION_COOKIE_NAME)?.value) ?? null;
 
   if (!sessionToken) {
