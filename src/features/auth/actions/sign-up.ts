@@ -1,5 +1,5 @@
 "use server";
-
+import { hash } from "@node-rs/argon2";
 import { z } from "zod";
 
 import {
@@ -11,8 +11,7 @@ import { createSession } from "@/lib/lucia";
 import { prisma } from "@/lib/prisma";
 import { generateRandomToken } from "@/utils/crypto";
 
-import { setSessionCookie } from "../auth/utils/session-cookie";
-import { hashPassword } from "../password/utils/hash-and-verify";
+import { setSessionCookie } from "../utils/session-cookie";
 
 const signupSchema = z
   .object({
@@ -44,7 +43,7 @@ export const signup = async (_actionState: ActionState, formData: FormData) => {
       Object.fromEntries(formData)
     );
 
-    const passwordHash = await hashPassword(password);
+    const passwordHash = await hash(password);
 
     const user = await prisma.user.create({
       data: {

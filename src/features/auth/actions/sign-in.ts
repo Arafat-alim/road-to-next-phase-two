@@ -1,15 +1,15 @@
 "use server";
-import { z } from "zod";
 import { verify } from "@node-rs/argon2";
+import { redirect } from "next/navigation";
+import { z } from "zod";
 
 import {
   ActionState,
   fromErrorToActionState,
   toActionState,
 } from "@/components/form/utils/to-action-state";
-import { redirect } from "next/navigation";
-import { ticketsPath } from "@/path";
 import { prisma } from "@/lib/prisma";
+import { ticketsPath } from "@/path";
 
 const signInSchema = z.object({
   email: z.string().min(1, { message: "Is required" }).max(191).email(),
