@@ -8,9 +8,11 @@ import { homePath, signInPath, signUpPath, ticketsPath } from "@/path";
 import { SubmitButton } from "./form/submit-button";
 import { ThemeSwitcher } from "./theme/theme-switcher";
 import { Button, buttonVariants } from "./ui/button";
+import { getAuth } from "@/features/auth/queries/get-auth";
 
-const Header = () => {
-  const navItems = (
+const Header = async () => {
+  const { user } = await getAuth();
+  const navItems = user ? (
     <>
       <Link
         href={ticketsPath()}
@@ -18,21 +20,25 @@ const Header = () => {
       >
         <span className="text-md font-medium">Tickets</span>
       </Link>
-      <Link
-        href={signInPath()}
-        className={buttonVariants({ variant: "outline" })}
-      >
-        <span className="text-md font-medium">Sign in</span>
-      </Link>
+
+      <form action={signOut}>
+        <SubmitButton label="Sign out" icon={<LucideLogOut />} />
+      </form>
+    </>
+  ) : (
+    <>
       <Link
         href={signUpPath()}
         className={buttonVariants({ variant: "outline" })}
       >
         <span className="text-md font-medium">Sign up</span>
       </Link>
-      <form action={signOut}>
-        <SubmitButton label="Sign out" icon={<LucideLogOut />} />
-      </form>
+      <Link
+        href={signInPath()}
+        className={buttonVariants({ variant: "default" })}
+      >
+        <span className="text-md font-medium">Sign in</span>
+      </Link>
     </>
   );
 
