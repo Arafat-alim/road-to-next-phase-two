@@ -1,5 +1,4 @@
 "use server";
-import { verify } from "@node-rs/argon2";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 
@@ -8,8 +7,13 @@ import {
   fromErrorToActionState,
   toActionState,
 } from "@/components/form/utils/to-action-state";
+import { verifyPassword } from "@/features/password/utils/hash-and-verify";
+import { createSession } from "@/lib/lucia";
 import { prisma } from "@/lib/prisma";
 import { ticketsPath } from "@/path";
+import { generateRandomToken } from "@/utils/crypto";
+
+import { setSessionCookie } from "../utils/session-cookie";
 
 const signInSchema = z.object({
   email: z.string().min(1, { message: "Is required" }).max(191).email(),
@@ -30,14 +34,18 @@ export const signin = async (_actionState: ActionState, formData: FormData) => {
       return toActionState("ERROR", "Incorrect email or passsword");
     }
 
-    const verifyPassword = await verify(user.passwordHash, password);
-    if (!verifyPassword) {
+    const validPassword = await verifyPassword(user.passwordHash, password);
+    if (!validPassword) {
       return toActionState("ERROR", "Incorrect email or passsword");
     }
+
+    const sesstionToken = generateRandomToken();
+    const session = await createSession(sesstionToken, user.id);
+
+    await setSessionCookie(sesstionToken, session.expiresAt);
   } catch (error) {
     return fromErrorToActionState(error);
   }
 
-  // return toActionState("SUCCESS", "Sign in successfull");
   redirect(ticketsPath());
 };
