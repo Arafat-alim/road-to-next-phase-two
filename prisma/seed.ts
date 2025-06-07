@@ -1,6 +1,12 @@
+import { hashPassword } from "@/features/password/utils/hash-and-verify";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
+
+const users = [
+  { username: "admin", email: "admin@admin.com" },
+  { username: "user", email: "user@mock.com" },
+];
 
 const tickets = [
   {
@@ -30,25 +36,27 @@ const tickets = [
 ];
 
 const seed = async () => {
-  //   for (const ticket of tickets) {
-  //     await prisma.ticket.create({
-  //       data: ticket,
-  //     });
-  //   }
-  //   const promises = tickets.map((ticket) =>
-  //     prisma.ticket.create({
-  //       data: ticket,
-  //     })
-  //   );
-  //   await Promise.all(promises);
   console.log("⚙️ Database seed: Started...");
 
   const t0 = performance.now();
 
   await prisma.tickets.deleteMany();
+  await prisma.user.deleteMany();
+
+  const passwordHash = await hashPassword("piccolo");
+
+  const dbUsers = await prisma.user.createManyAndReturn({
+    data: users.map((user) => ({
+      ...user,
+      passwordHash,
+    })),
+  });
 
   await prisma.tickets.createMany({
-    data: tickets,
+    data: tickets.map((ticket) => ({
+      ...ticket,
+      userId: dbUsers[0].id,
+    })),
   });
   const t1 = performance.now();
 

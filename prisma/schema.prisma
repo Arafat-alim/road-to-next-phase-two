@@ -16,6 +16,15 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
+model User {
+  id String @id @default(cuid())
+  passwordHash String
+  username String @unique
+  email String @unique
+  sessions Session[]
+  tickets Tickets[]
+}
+
 model Tickets {
   id        String       @id @default(cuid())
   createdAt DateTime     @default(now())
@@ -25,15 +34,13 @@ model Tickets {
   status    TicketStatus @default(OPEN)
   bounty Int
   deadline String
+  userId String
+  user User @relation(fields: [userId], references: [id])
+
+  @@index([userId])
 }
 
-model User {
-  id String @id @default(cuid())
-  passwordHash String
-  username String @unique
-  email String @unique
-  sessions Session[]
-}
+
 
 model Session {
   id String @id
