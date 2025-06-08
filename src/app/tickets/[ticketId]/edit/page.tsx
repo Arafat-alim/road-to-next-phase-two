@@ -4,6 +4,8 @@ import React from "react";
 import { CardCompact } from "@/components/card-compact";
 import TicketUpsertForm from "@/features/ticket/components/ticket-upsert-form";
 import { getTicket } from "@/features/ticket/queries/get-ticket";
+import { isOwner } from "@/features/auth/utils/is-owner";
+import { getAuth } from "@/features/auth/queries/get-auth";
 
 // type TicketEditPageProps = {
 //   params: {
@@ -23,6 +25,12 @@ const TicketEditPage = async ({ params }: any) => {
     notFound();
   }
 
+  const { user } = await getAuth();
+  const isTicketOwner = await isOwner(user, ticket);
+
+  if (!isTicketOwner) {
+    notFound();
+  }
   return (
     <div className="flex-1 flex flex-col justify-center items-center">
       <CardCompact
