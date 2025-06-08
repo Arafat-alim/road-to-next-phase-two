@@ -1,7 +1,8 @@
-import React from "react";
-import { getAuth } from "./get-auth";
 import { redirect } from "next/navigation";
+
 import { signInPath } from "@/path";
+
+import { getAuth } from "./get-auth";
 
 const getAuthOrRedirect = async () => {
   const auth = await getAuth();

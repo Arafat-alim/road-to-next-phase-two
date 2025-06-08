@@ -1,10 +1,13 @@
-import { User } from "@prisma/client";
-
 type Entity = {
   userId: string | null;
 };
 
-const isOwner = async (authUser: User | null | undefined, entity: Entity) => {
+export type AuthUser = {
+  id: string;
+  username: string;
+};
+
+const isOwner = (authUser: AuthUser | null | undefined, entity: Entity) => {
   if (!authUser || !entity) {
     return false;
   }

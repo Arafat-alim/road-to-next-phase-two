@@ -2,10 +2,10 @@ import { notFound } from "next/navigation";
 import React from "react";
 
 import { CardCompact } from "@/components/card-compact";
+import { getAuth } from "@/features/auth/queries/get-auth";
+import { isOwner } from "@/features/auth/utils/is-owner";
 import TicketUpsertForm from "@/features/ticket/components/ticket-upsert-form";
 import { getTicket } from "@/features/ticket/queries/get-ticket";
-import { isOwner } from "@/features/auth/utils/is-owner";
-import { getAuth } from "@/features/auth/queries/get-auth";
 
 // type TicketEditPageProps = {
 //   params: {
@@ -26,7 +26,7 @@ const TicketEditPage = async ({ params }: any) => {
   }
 
   const { user } = await getAuth();
-  const isTicketOwner = await isOwner(user, ticket);
+  const isTicketOwner = isOwner(user, ticket);
 
   if (!isTicketOwner) {
     notFound();
