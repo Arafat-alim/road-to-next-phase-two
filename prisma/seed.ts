@@ -40,8 +40,8 @@ const seed = async () => {
 
   const t0 = performance.now();
 
-  await prisma.tickets.deleteMany();
   await prisma.user.deleteMany();
+  await prisma.tickets.deleteMany();
 
   const passwordHash = await hashPassword("piccolo");
 

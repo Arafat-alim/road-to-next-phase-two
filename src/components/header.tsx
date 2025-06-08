@@ -5,7 +5,7 @@ import React from "react";
 
 import { signOut } from "@/features/auth/actions/sign-out";
 import { useAuth } from "@/features/auth/hooks/use-auth";
-import { homePath, signInPath, signUpPath, ticketsPath } from "@/path";
+import { homePath, signInPath, ticketsPath } from "@/path";
 
 import { SubmitButton } from "./form/submit-button";
 import { ThemeSwitcher } from "./theme/theme-switcher";
@@ -33,12 +33,12 @@ const Header = () => {
     </>
   ) : (
     <>
-      <Link
+      {/* <Link
         href={signUpPath()}
         className={buttonVariants({ variant: "outline" })}
       >
         <span className="text-md font-medium">Sign up</span>
-      </Link>
+      </Link> */}
       <Link
         href={signInPath()}
         className={buttonVariants({ variant: "default" })}

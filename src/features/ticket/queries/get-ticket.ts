@@ -7,5 +7,8 @@ export const getTicket = async (id: string): Promise<Tickets | null> => {
     where: {
       id: id,
     },
+    include: {
+      user: true,
+    },
   });
 };
