@@ -2,7 +2,9 @@ import { Prisma } from "@prisma/client";
 
 import { prisma } from "@/lib/prisma";
 
-export const getTickets = async (): Promise<
+export const getTickets = async (
+  userId?: string | undefined
+): Promise<
   Prisma.TicketsGetPayload<{
     include: {
       user: {
@@ -14,6 +16,9 @@ export const getTickets = async (): Promise<
   }>[]
 > => {
   return await prisma.tickets.findMany({
+    where: {
+      userId,
+    },
     orderBy: {
       createdAt: "desc",
     },
