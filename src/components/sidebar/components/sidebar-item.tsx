@@ -1,5 +1,5 @@
 "use client";
-import React, { cloneElement } from "react";
+import React from "react";
 import { Navitem } from "../type";
 import { usePathname } from "next/navigation";
 import Link from "next/link";

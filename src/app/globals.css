@@ -47,7 +47,7 @@
   /* This maps 'animate-fade-in-from-top' to your keyframes. */
   --animate-fade-in-from-top: fade-in-from-top 0.5s ease-out forwards;
   --animate-header-from-top: header-from-top 0.5s ease-out;
-
+  --animate-sidebar-from-left: sidebar-from-left 0.5s ease-out;
   /* --- Define your @keyframes rule directly here --- */
   /* This specifies the steps of your animation. */
   @keyframes fade-in-from-top {
@@ -66,6 +66,14 @@
     }
     to {
       transform: translateY(0);
+    }
+  }
+  @keyframes sidebar-from-left {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(0);
     }
   }
 }
