@@ -1,4 +1,7 @@
+import { LucideChevronRight } from "lucide-react";
+import Link from "next/link";
 import React, { Fragment } from "react";
+
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -7,12 +10,6 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import Link from "next/link";
-import {
-  LucideArrowBigRightDash,
-  LucideChevronRight,
-  LucideSlash,
-} from "lucide-react";
 
 type BreadcrumbsProps = {
   breadcrumbs: {
@@ -44,7 +41,7 @@ const Breadcrumbs = ({ breadcrumbs }: BreadcrumbsProps) => {
           }
 
           return (
-            <Fragment>
+            <Fragment key={index}>
               <BreadcrumbItem>{breadcrumbItem}</BreadcrumbItem>
               {index < breadcrumbs.length - 1 && (
                 <BreadcrumbSeparator className="flex justify-center items-center">

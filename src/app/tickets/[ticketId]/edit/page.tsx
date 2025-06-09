@@ -1,14 +1,14 @@
 import { notFound } from "next/navigation";
 import React from "react";
 
+import { Breadcrumbs } from "@/components/breadcrumbs";
 import { CardCompact } from "@/components/card-compact";
+import { Separator } from "@/components/ui/separator";
 import { getAuth } from "@/features/auth/queries/get-auth";
 import { isOwner } from "@/features/auth/utils/is-owner";
 import TicketUpsertForm from "@/features/ticket/components/ticket-upsert-form";
 import { getTicket } from "@/features/ticket/queries/get-ticket";
-import { Breadcrumbs } from "@/components/breadcrumbs";
-import { homePath, ticketPath, ticketsPath } from "@/path";
-import { Separator } from "@/components/ui/separator";
+import { homePath, ticketPath } from "@/path";
 
 // type TicketEditPageProps = {
 //   params: {

@@ -1,11 +1,11 @@
 import { notFound } from "next/navigation";
 import React from "react";
 
+import { Breadcrumbs } from "@/components/breadcrumbs";
+import { Separator } from "@/components/ui/separator";
 import { TicketItem } from "@/features/ticket/components/ticket-item";
 import { getTicket } from "@/features/ticket/queries/get-ticket";
-import { Breadcrumbs } from "@/components/breadcrumbs";
 import { homePath } from "@/path";
-import { Separator } from "@/components/ui/separator";
 
 // --- START CHANGE (Fixing ESLint errors) ---
 // 1. Removed 'searchParams' from destructuring as it's unused.

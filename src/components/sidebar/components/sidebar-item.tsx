@@ -1,11 +1,13 @@
 "use client";
-import React from "react";
-import { Navitem } from "../type";
 import Link from "next/link";
-import { cn } from "@/lib/utils";
+import React from "react";
+
 import { buttonVariants } from "@/components/ui/button";
-import { closedClassName } from "../constants";
 import { Separator } from "@/components/ui/separator";
+import { cn } from "@/lib/utils";
+
+import { closedClassName } from "../constants";
+import { Navitem } from "../type";
 
 type NavItemProps = {
   navItem: Navitem;
