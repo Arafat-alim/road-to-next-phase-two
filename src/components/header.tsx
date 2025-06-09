@@ -5,7 +5,7 @@ import React from "react";
 
 import { signOut } from "@/features/auth/actions/sign-out";
 import { useAuth } from "@/features/auth/hooks/use-auth";
-import { homePath, signInPath, ticketsPath } from "@/path";
+import { homePath, signInPath, signUpPath, ticketsPath } from "@/path";
 
 import { SubmitButton } from "./form/submit-button";
 import { ThemeSwitcher } from "./theme/theme-switcher";
@@ -20,25 +20,12 @@ const Header = () => {
 
   const navItems = user ? (
     <>
-      <Link
-        href={ticketsPath()}
-        className={buttonVariants({ variant: "default" })}
-      >
-        <span className="text-md font-medium">Tickets</span>
-      </Link>
-
       <form action={signOut}>
         <SubmitButton label="Sign out" icon={<LucideLogOut />} />
       </form>
     </>
   ) : (
     <>
-      {/* <Link
-        href={signUpPath()}
-        className={buttonVariants({ variant: "outline" })}
-      >
-        <span className="text-md font-medium">Sign up</span>
-      </Link> */}
       <Link
         href={signInPath()}
         className={buttonVariants({ variant: "default" })}
