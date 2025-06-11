@@ -7,8 +7,8 @@ import { useAuth } from "@/features/auth/hooks/use-auth";
 import { homePath, signInPath } from "@/path";
 
 import { AccountDropDown } from "./account-dropdown";
-import { ThemeSwitcher } from "./theme/theme-switcher";
-import { Button, buttonVariants } from "./ui/button";
+import { ThemeSwitcher } from "../../components/theme/theme-switcher";
+import { Button, buttonVariants } from "../../components/ui/button";
 
 const Header = () => {
   const { user, isFetched } = useAuth();
