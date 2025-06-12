@@ -1,6 +1,7 @@
 import React from "react";
 
 import { Heading } from "@/components/Heading";
+
 import { AccountTabs } from "../../_navigation/tabs";
 
 const ProfilePage = () => {
